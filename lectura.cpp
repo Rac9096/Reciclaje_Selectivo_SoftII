@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <unordered_map>
 using namespace std;
 
 
@@ -9,11 +10,11 @@ using namespace std;
 int main(){
 
 
-
+unordered_map <float, unordered_map<float, float>> nodos;
 
 //--------------------------------------------------LECTURA---------------------------------------------------------------
 	ifstream fin;
-	string archivo= "PLRP1coord20-5-1.dat";
+	string archivo= "bla.dat";
 	fin.open(archivo);
 
     if (! fin.is_open() ){
@@ -21,7 +22,9 @@ int main(){
 		exit(-1);
 	}
 
-    float palabra;
+    float x;
+    float y;
+    float carga;
     string tmp;
 
 	while(true){
@@ -31,17 +34,21 @@ int main(){
 		stringstream flujo(tmp);
 		if (fin.eof()) break;
       		while(flujo.good()){
-		    flujo >> palabra;
-		    cout<<" "<< palabra;
+		    flujo >> x;
+		    flujo >> y;
+		    flujo >> carga;
+		    nodos[x][y]=carga;
       		}
-      		cout<<endl;
 		
 }
 
+/*
+for(unordered_map<float, unordered_map<float, float> >::iterator ii=nodos.begin(); ii!=nodos.end(); ++ii){
+	for(ii.unordered_map<float, float>::iter ia=nodos.begin(); ia!=nodos.end(); ++ia){
 
+		cout<<ii<<" "<<ia<<" "<<nodos[ii][ia]<<endl;
+	}
 
-
-
-
+}*/
 
 }
