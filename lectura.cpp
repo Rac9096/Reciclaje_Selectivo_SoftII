@@ -2,15 +2,26 @@
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
+#include <vector>
+#include <stdlib.h>
+#include <stdio.h>
 using namespace std;
 
 
-
+typedef vector <float> v_chico;
+typedef	vector <v_chico> v_grande;
 
 int main(){
 
 
-unordered_map <float, unordered_map<float, float>> nodos;
+unordered_map <int, unordered_map<int, int>> nodos;
+v_chico v1;
+v_grande mc;
+
+int n=1;
+int m=20;
+int coordenadas[n][m];
+
 
 //--------------------------------------------------LECTURA---------------------------------------------------------------
 	ifstream fin;
@@ -22,33 +33,34 @@ unordered_map <float, unordered_map<float, float>> nodos;
 		exit(-1);
 	}
 
-    float x;
-    float y;
-    float carga;
+    int x;
+    int y;
+    int carga;
     string tmp;
 
+    int j=0;
 	while(true){
         
-        
+ 		
 		getline(fin, tmp);
 		stringstream flujo(tmp);
 		if (fin.eof()) break;
-      		while(flujo.good()){
-		    flujo >> x;
-		    flujo >> y;
-		    flujo >> carga;
-		    nodos[x][y]=carga;
+
+      		while(flujo.good())
+      		{
+			 
+			    flujo >> x;
+			    flujo >> y;
+			    flujo >> carga;
+			    nodos[x][y]=carga;
       		}
-		
+         	coordenadas[0][j] = x;
+		    coordenadas[1][j] = y;
+		    cout << coordenadas[0][j] << "\t" << coordenadas[1][j] << endl;
+			
+			j++;
+
 }
 
-/*
-for(unordered_map<float, unordered_map<float, float> >::iterator ii=nodos.begin(); ii!=nodos.end(); ++ii){
-	for(ii.unordered_map<float, float>::iter ia=nodos.begin(); ia!=nodos.end(); ++ia){
-
-		cout<<ii<<" "<<ia<<" "<<nodos[ii][ia]<<endl;
-	}
-
-}*/
 
 }
