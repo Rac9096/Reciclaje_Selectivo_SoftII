@@ -89,7 +89,6 @@ int H = 5;
 			int delta_y_2 = pow((coordenadas[i][1] - coordenadas[j][1]),2);
 			int res = ((delta_y_2 + delta_x_2));
             m_costo[i][j].costo = res;
-            cout << m_costo[i][j].costo << "\t";
             for(int k=0; k<K; k++)
             {
                 for(int l=0; l<H; l++)
@@ -98,34 +97,88 @@ int H = 5;
                 }
             }
 		}
-		cout << endl;
 	}
 	int menor = 10000000;
-	int nod[2];
-	
 
+	
+//------------------------------ENCONTRAR RUTA---------------------
 
 	int cant_visit=5;
 
 
+	int visit=0;
+	int c=0; int k=1;
+	int paseo=1;
+	cout<<"llegue aca"<<endl;
+	vector<int> v;
+	int c_menor=0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	pair <int, int> par;
+	int c1,c2;
+	int visitado[c_depos];
+	for(int i=0; i<c_depos; i++)
+	{
+		visitado[i]=0;
 	}
+
+while(visit<cant_visit)
+{
+	
+	while(paseo<c_depos+1)
+	{
+		
+		if(visitado[k]!=1)
+		{
+
+			if((m_costo[c][k].costo)<=menor)
+			{
+				menor=(m_costo[c][k].costo);
+				c_menor=k;
+				k++;
+			
+			}
+			else
+			{
+				k++;
+
+			}
+
+		}
+		else{
+			k++;
+		}
+				paseo++;
+	}
+		c1 = coordenadas[c_menor][0];
+		c2 = coordenadas[c_menor][1];
+			visitado[c_menor]=1;
+			par = make_pair(c1, c2);
+			ruta.push_back(par);
+			visit++;
+			c=c_menor;
+			k=1;
+			c_menor=0;
+			paseo=0;
+			menor=10000000;
+
+}
+
+for(int i = 0 ;i < 5 ; i++)
+{
+	cout << ruta[i].first<< " "<< ruta[i].second <<  endl; 
+
+}
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
