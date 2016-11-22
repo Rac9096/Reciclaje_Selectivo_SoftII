@@ -1,20 +1,20 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <unordered_map>
 #include <vector>
-#include <stdio.h>
 #include <stdlib.h>
-
-
+#include <stdio.h>
+#include <string>
+#include <math.h>
 using namespace std;
 
-typedef struct
+typedef unordered_map<int, int> mp;
+
+typedef struct grafo
 {
   int costo;
-  int vehiculo;
-  int periodicidad[5];
-}arista;
+  unordered_map<int, mp> x;
+}Grafo;
 
 
-
-
-typedef vector <int> v_1; // este es un vector que guarda enteros y se declara como v_1
-typedef vector <v_1> matriz; // este es un vector que guarda vectores y se declara como matriz
