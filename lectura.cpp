@@ -3,13 +3,41 @@
 
 
 
+int Calcular_min_z(Grafo **m, int c_depos, int K, int H)//(rutas a, rutas b, rutas etc)
+{
+    int z=0;
+    for(int i=0; i<c_depos; i++)
+    {
+        for(int j=0; j<c_depos; j++)
+        {
+            for(int k=0; k<K; k++)
+            {
+                for(int l=0; l<H; l++)
+                {
+                    z = z+m[i][j].x[k][l]*m[i][j].costo;
+                }
+            }
+        }
+    }
+    return z;
+}
+
+void Generar_Ruta()
+{
+
+}
+
 
 int main()
 {
 
+
+
+
+
+
 	int m=2;
-	vector<pair<int,int>> ruta;
-	//ruta[i].first
+	unordered_map<int , unordered_map<int, int>> ruta;	//ruta[i].first
 	//ruta[i].second
 //--------------------------------------------------LECTURA---------------------------------------------------------------
 	ifstream fin;
@@ -29,6 +57,15 @@ int main()
     int y;
     int carga;
     string tmp;
+
+
+    //MAPA DE GRAFO (FUNCIONAAAAAA!!!)
+    //unordered_map<int, unordered_map<int, Grafo>> m_costo;
+  /*  m_costo_2[0][0].costo = 2;
+    m_costo_2[0][0].x[0][0] = 1;
+    cout << m_costo_2[0][0].costo << endl;
+    cout << m_costo_2[0][0].x[0][0] << endl;*/
+ 
 
     int i=1;
 
@@ -56,7 +93,7 @@ int main()
 				    flujo >> x;
 				    flujo >> y;
 				    flujo >> carga;
-				
+
 
       		}
 
@@ -71,16 +108,16 @@ int main()
 	coordenadas[0][0] = medx;
 	coordenadas[0][1] = medy;
 
-cout << endl << endl << endl;
+    cout << endl << endl << endl;
 
-cout <<c_depos<<endl;
-cout <<c_vehi<<endl;
-cout <<c_pto_aco<<endl;
+    cout <<c_depos<<endl;
+    cout <<c_vehi<<endl;
+    cout <<c_pto_aco<<endl;
 
-int K = 3;
-int H = 5;
+    int K = 3;
+    int H = 5;
 
-//matriz de costo
+    //MATRIZ DE COSTO
 	for(int i=0; i<c_depos+1; i++)
 	{
 		for(int j=0; j<c_depos+1; j++)
@@ -100,7 +137,7 @@ int H = 5;
 	}
 	int menor = 10000000;
 
-	
+
 //------------------------------ENCONTRAR RUTA---------------------
 
 	int cant_visit=5;
@@ -109,7 +146,6 @@ int H = 5;
 	int visit=0;
 	int c=0; int k=1;
 	int paseo=1;
-	cout<<"llegue aca"<<endl;
 	vector<int> v;
 	int c_menor=0;
 
@@ -121,51 +157,72 @@ int H = 5;
 		visitado[i]=0;
 	}
 
-while(visit<cant_visit)
+
+int vehi_usados=0;
+
+while(vehi_usados<c_vehi)
 {
-	
-	while(paseo<c_depos+1)
+	while(visit<cant_visit)
 	{
-		
-		if(visitado[k]!=1)
+
+		while(paseo<c_depos+1)
 		{
 
-			if((m_costo[c][k].costo)<=menor)
+			if(visitado[k]!=1)
 			{
-				menor=(m_costo[c][k].costo);
-				c_menor=k;
-				k++;
-			
-			}
-			else
-			{
-				k++;
+
+				if((m_costo[c][k].costo)<=menor)
+				{
+					menor=(m_costo[c][k].costo);
+					c_menor=k;
+					k++;
+
+				}
+				else
+				{
+					k++;
+
+				}
 
 			}
+			else{
+				k++;
+			}
+					paseo++;
+		}
+			c1 = coordenadas[c_menor][0];
+			c2 = coordenadas[c_menor][1];
+				visitado[c_menor]=1;
+				//par = make_pair(c1, c2);
+				//ruta[vehi_usados].push_back(par);
+				ruta[vehi_usados][c1]=c2;
+				visit++;
+				c=c_menor;
+				k=1;
+				c_menor=0;
+				paseo=0;
+				menor=10000000;
 
-		}
-		else{
-			k++;
-		}
-				paseo++;
 	}
-		c1 = coordenadas[c_menor][0];
-		c2 = coordenadas[c_menor][1];
-			visitado[c_menor]=1;
-			par = make_pair(c1, c2);
-			ruta.push_back(par);
-			visit++;
-			c=c_menor;
-			k=1;
-			c_menor=0;
-			paseo=0;
-			menor=10000000;
-
+	vehi_usados++;
 }
 
-for(int i = 0 ;i < 5 ; i++)
+//RECORRE RUTA
+
+
+for(int i=0; i< c_vehi; i++)
 {
-	cout << ruta[i].first<< " "<< ruta[i].second <<  endl; 
+	cout<<"vehiculo\t"<<ruta[].first<<endl
+	for (int j = 0; j < cant_visit; j++)
+	{
+		
+		cout<<ruta[][].second<<"\t"<<ruta[i][j]<<endl;
+
+
+
+	}
+
+
 
 }
 
@@ -175,10 +232,4 @@ for(int i = 0 ;i < 5 ; i++)
 
 
 
-
 }
-
-
-
-
-
